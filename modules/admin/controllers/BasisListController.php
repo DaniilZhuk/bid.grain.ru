@@ -38,6 +38,8 @@ class BasisListController extends Controller
      */
     public function actionIndex()
     {
+        \Yii::$app->language = isset($_SESSION['language']) ? $_SESSION['language'] : null;
+       
         $searchModel = new BasisListSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -55,6 +57,8 @@ class BasisListController extends Controller
      */
     public function actionView($id)
     {
+        \Yii::$app->language = isset($_SESSION['language']) ? $_SESSION['language'] : null;
+       
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -67,15 +71,20 @@ class BasisListController extends Controller
      */
     public function actionCreate()
     {
+        \Yii::$app->language = isset($_SESSION['language']) ? $_SESSION['language'] : null;
+       
         $model = new BasisList();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->actionIndex();
+                //return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
         }
+
+       
 
         return $this->render('create', [
             'model' => $model,
@@ -91,6 +100,8 @@ class BasisListController extends Controller
      */
     public function actionUpdate($id)
     {
+        \Yii::$app->language = isset($_SESSION['language']) ? $_SESSION['language'] : null;
+       
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -111,6 +122,8 @@ class BasisListController extends Controller
      */
     public function actionDelete($id)
     {
+        \Yii::$app->language = isset($_SESSION['language']) ? $_SESSION['language'] : null;
+       
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -125,6 +138,8 @@ class BasisListController extends Controller
      */
     protected function findModel($id)
     {
+        \Yii::$app->language = isset($_SESSION['language']) ? $_SESSION['language'] : null;
+       
         if (($model = BasisList::findOne(['id' => $id])) !== null) {
             return $model;
         }

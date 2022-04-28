@@ -41,4 +41,5 @@ class BasisList extends \yii\db\ActiveRecord
             'name' => 'Name',
         ];
     }
+   
 }

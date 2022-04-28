@@ -1,7 +1,8 @@
 <?php
 
+use app\models\BasisList;
 use yii\helpers\Html;
-
+use yii\helpers\ArrayHelper;
 // use kartik\date\DatePicker;
 use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
@@ -41,14 +42,16 @@ use yii\widgets\ActiveForm;
             'autoGroup' => true
         ],
         ]); ?>
-         <?= $form->field($model, 'basis')->dropDownList(
-            [
-                'maxlength' => true
-            ],
-            [
-                'prompt' => 'Выберите базиз поставки...'
-            ]) 
+        <?php
+            $authors = BasisList::find()->all();
+            // формируем массив, с ключем равным полю 'id' и значением равным полю 'name' 
+             $items = ArrayHelper::map($authors,'name','name');
+             $params = [
+                 'prompt' => 'Select delivery terms'
+             ];
+             echo $form->field($model, 'basis')->dropDownList($items,$params);
         ?>
+        
         
         <?= $form->field($model, 'price')->textInput(['type'=>'number','maxlength' => true, 'step'=>1, 'placeholder'=>'1000']) ?>
 

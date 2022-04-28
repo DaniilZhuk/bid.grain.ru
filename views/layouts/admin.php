@@ -54,7 +54,7 @@ AppAsset::register($this);
             // Responses
             ['label' => \Yii::t('app', 'Responses'), 'url' => ['/admin/response']],
             ($userIsadmin == 1 or $userIsadmin == 2) ? (
-                ['label' =>  \Yii::t('app', 'Basis list'), 'url' => ['/admin/basislist']] 
+                ['label' =>  \Yii::t('app', 'Basis list'), 'url' => ['/admin/basis-list']] 
             ) : (
                 ''
             ),
