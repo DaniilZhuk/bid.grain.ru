@@ -53,11 +53,11 @@ AppAsset::register($this);
             ['label' => \Yii::t('app', 'Requests'), 'url' => ['/admin/bid']],
             // Responses
             ['label' => \Yii::t('app', 'Responses'), 'url' => ['/admin/response']],
-            // ($userIsadmin == 1 or $userIsadmin == 2) ? (
-            //     ['label' =>  \Yii::t('app', 'Requisition archive'), 'url' => ['/admin/archive']]
-            // ) : ( 
-            //     ''
-            // ) ,
+            ($userIsadmin == 1 or $userIsadmin == 2) ? (
+                ['label' =>  \Yii::t('app', 'Basis list'), 'url' => ['/admin/basislist']] 
+            ) : (
+                ''
+            ),
             Yii::$app->user->isGuest ? (
                 ['label' =>  \Yii::t('app', 'Sign in'), 'url' => ['/site/login']]
             ) : (

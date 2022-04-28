@@ -41,8 +41,15 @@ use yii\widgets\ActiveForm;
             'autoGroup' => true
         ],
         ]); ?>
+         <?= $form->field($model, 'basis')->dropDownList(
+            [
+                'maxlength' => true
+            ],
+            [
+                'prompt' => 'Выберите базиз поставки...'
+            ]) 
+        ?>
         
-        <?= $form->field($model, 'basis')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'price')->textInput(['type'=>'number','maxlength' => true, 'step'=>1, 'placeholder'=>'1000']) ?>
 
     <!-- <?= $form->field($model, 'nomenclature')->listBox([

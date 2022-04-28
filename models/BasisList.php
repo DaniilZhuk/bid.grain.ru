@@ -19,7 +19,7 @@ class BasisList extends \yii\db\ActiveRecord
     {
         return 'basis_list';
     }
-
+ 
     /**
      * {@inheritdoc}
      */
