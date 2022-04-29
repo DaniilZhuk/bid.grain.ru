@@ -31,6 +31,7 @@ return [
      'Requests' => 'Заявки',
      'Responses' => 'Отклики',
      'Log out' =>'Выйти' ,
+     'Create a request'=>'Создать заявку',
 
      'Update' => 'Изменить',
      'Save' => 'Сохранить',

@@ -1,5 +1,4 @@
 <?php
-
 use app\models\BasisList;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
@@ -42,8 +41,12 @@ use yii\widgets\ActiveForm;
             'autoGroup' => true
         ],
         ]); ?>
+        
         <?php
             $authors = BasisList::find()->all();
+            if ($authors){
+
+            }
             // формируем массив, с ключем равным полю 'id' и значением равным полю 'name' 
              $items = ArrayHelper::map($authors,'name','name');
              $params = [
@@ -51,8 +54,6 @@ use yii\widgets\ActiveForm;
              ];
              echo $form->field($model, 'basis')->dropDownList($items,$params);
         ?>
-        
-        
         <?= $form->field($model, 'price')->textInput(['type'=>'number','maxlength' => true, 'step'=>1, 'placeholder'=>'1000']) ?>
 
     <!-- <?= $form->field($model, 'nomenclature')->listBox([
@@ -81,7 +82,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'comment')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(\Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

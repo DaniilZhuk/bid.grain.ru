@@ -5,7 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Bid */
 
-$this->title = 'Создать заявку';
+$this->title = \Yii::t('app', 'Create a request');
+
 $this->params['breadcrumbs'][] = ['label' => 'Bids', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
