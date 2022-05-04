@@ -77,8 +77,5 @@ class Bid extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Response::class, ['id_bid' => 'id'])->count();
     }
-    public function getBasislist()
-    {
-        return $this->hasOne(BasisList::class, ['name' => 'Basis'])->count();
-    }
+   
 }

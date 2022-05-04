@@ -1,5 +1,6 @@
 <?php
 use app\models\BasisList;
+use app\models\NomenclatureList;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 // use kartik\date\DatePicker;
@@ -13,27 +14,10 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <!-- <?= $form->field($model, 'basis')->dropDownList([
-            'Юг Руси, АО (г. Ростов-на-Дону, ул. Луговая, 9)' => 'Юг Руси, АО (г. Ростов-на-Дону, ул. Луговая, 9)',
-            'ЮР Лабинский МЭЗ ф-л, ООО (Краснодарский кр., г.Лабинск, ул.Красная, 100)'=>'ЮР Лабинский МЭЗ ф-л, ООО (Краснодарский кр., г.Лабинск, ул.Красная, 100)',
-            'ООО Кропоткинский ЗЭРМ 	(г. Кропоткин, ул. Красная,1)'=>'ООО Кропоткинский ЗЭРМ 	(г. Кропоткин, ул. Красная,1)',
-            'Аннинский МЭЗ ООО (Воронежская область,  п.г.т. Анна, ул. Ленина, д. №1)'=>'Аннинский МЭЗ ООО (Воронежская область,  п.г.т. Анна, ул. Ленина, д. №1)',
-            'ЮР Лискинский МЭЗ ф-л ООО (Воронежская область, г. Лиски,  ул. 40 лет Октября, д.62)'=>'ЮР Лискинский МЭЗ ф-л ООО (Воронежская область, г. Лиски,  ул. 40 лет Октября, д.62)',
-            'ЮР Валуйский МЭЗ ф-л, ООО (Белгородская область, город Валуйки, улица Никольская, 119)'=>'ЮР Валуйский МЭЗ ф-л, ООО (Белгородская область, город Валуйки, улица Никольская, 119)',
-            'ОАО "МЖК Краснодарский"  	(г. Краснодар. ул. Тихорецкая 5)'=>'ОАО "МЖК Краснодарский"  	(г. Краснодар. ул. Тихорецкая 5)',
-            'TOO "Актобе Фудс"	(Республика Казахстан, г. Актобе, 41 разъезд, Курсантское шоссе, Дом 322)' =>'TOO "Актобе Фудс"	(Республика Казахстан, г. Актобе, 41 разъезд, Курсантское шоссе, Дом 322)',
-            
-    ],
-     [
-        'prompt' => 'Выберите базиз поставки...'
-    ]
-        
-        ); ?> -->
-
         <?= $form->field($model, 'volume')->textInput(['style'=>'text-align: left;'])->widget(\yii\widgets\MaskedInput::className(), [
         // 'mask' => '999 999',
         'options' => [
-           'autocomplete' => "off",
+            'autocomplete' => "off",
         ],
         'clientOptions' => [
             'alias' =>  'decimal',
@@ -41,49 +25,50 @@ use yii\widgets\ActiveForm;
             'autoGroup' => true
         ],
         ]); ?>
-        
+            
         <?php
             $authors = BasisList::find()->all();
             if ($authors){
-
-            }
-            // формируем массив, с ключем равным полю 'id' и значением равным полю 'name' 
-             $items = ArrayHelper::map($authors,'name','name');
-             $params = [
-                 'prompt' => 'Select delivery terms'
-             ];
-             echo $form->field($model, 'basis')->dropDownList($items,$params);
+                // формируем массив, с ключем равным полю 'id' и значением равным полю 'name' 
+                $items = ArrayHelper::map($authors,'name','name');
+                $params = [
+                    'prompt' => 'Select delivery terms'
+                ];
+                echo $form->field($model, 'basis')->dropDownList($items,$params);
+            }            
         ?>
+
         <?= $form->field($model, 'price')->textInput(['type'=>'number','maxlength' => true, 'step'=>1, 'placeholder'=>'1000']) ?>
 
-    <!-- <?= $form->field($model, 'nomenclature')->listBox([
-        'Crude sunflower oil of industrial processing' =>  \Yii::t('app', 'Crude sunflower oil of industrial processing'),
-        'Crude sunflower oil, first grade'=>\Yii::t('app', 'Crude sunflower oil, first grade'),
-        'Crude sunflower oil, top grade'=>\Yii::t('app', 'Crude sunflower oil, top grade') ,     
-    ], [
-        'multiple' => true,
-    ]) ?> -->
+        <?php
+            $NomenclatureList = NomenclatureList::find()->all();
+            if ($NomenclatureList){
+                // формируем массив, с ключем равным полю 'id' и значением равным полю 'name' 
+                $items = ArrayHelper::map($NomenclatureList,'name','name');
+                $params = [
+                    'prompt' => 'Select product name'
+                ];
+                echo $form->field($model, 'nomenclature')->dropDownList($items,$params);
+            }            
+        ?>
 
-    <?= $form->field($model, 'nomenclature')->textInput(['maxlength' => true]) ?>
+        <!-- <?/*= $form->field($model, 'nomenclature')->textInput(['maxlength' => true]) */?> -->
 
-    <?= $form->field($model, 'quality')->textarea(['maxlength' => true, 'rows'=>6]) ?>
+        <?= $form->field($model, 'quality')->textarea(['maxlength' => true, 'rows'=>6]) ?>
 
-    <?= $form->field($model, 'date_from')->textInput(['type' => 'date',   'value' => $model->date_from]) ?>
+        <?= $form->field($model, 'date_from')->textInput(['type' => 'date',   'value' => $model->date_from]) ?>
+    
+        <?= $form->field($model, 'date_to')->textInput(['type' => 'date',   'value' =>  $model->date_to  ]) ?>
    
-    <?= $form->field($model, 'date_to')->textInput(['type' => 'date',   'value' =>  $model->date_to  ]) ?>
-   
-
-   
-
-<?= $form->field($model, 'end_date')->textInput(['type' => 'datetime-local',
+        <?= $form->field($model, 'end_date')->textInput(['type' => 'datetime-local',
         'value' => str_replace(date('Y-m-d', strtotime($model->end_date)).' ',
             date('Y-m-d', strtotime($model->end_date)).'T', $model->end_date )]) ?>
 
-    <?= $form->field($model, 'comment')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'comment')->textInput(['maxlength' => true]) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton(\Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
-    </div>
+        <div class="form-group">
+            <?= Html::submitButton(\Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+        </div>
 
     <?php ActiveForm::end(); ?>
 

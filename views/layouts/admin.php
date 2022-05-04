@@ -58,6 +58,11 @@ AppAsset::register($this);
             ) : (
                 ''
             ),
+            ($userIsadmin == 1 or $userIsadmin == 2) ? (
+                ['label' =>  \Yii::t('app', 'Product list'), 'url' => ['/admin/nomenclature-list']] 
+            ) : (
+                ''
+            ),
             Yii::$app->user->isGuest ? (
                 ['label' =>  \Yii::t('app', 'Sign in'), 'url' => ['/site/login']]
             ) : (
