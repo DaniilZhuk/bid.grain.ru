@@ -36,7 +36,8 @@ class Bid extends \yii\db\ActiveRecord
         return [
             [['volume', 'price', 'nomenclature', 'end_date'], 'required'],
             [['end_date','date_from', 'date_to'], 'safe'],
-            [['basis', 'volume', 'price', 'quality', 'comment'], 'string', 'max' => 255],
+            [['basis', 'volume', 'price', 'comment'], 'string', 'max' => 255],
+            [['quality'], 'string', 'max' => 1000],
             [['basis','logistic', 'comment', 'quality'], 'default', 'value' => '']
         ];
     }

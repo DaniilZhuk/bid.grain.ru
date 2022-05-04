@@ -60,12 +60,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
             'id',
+            'nomenclature',
            // 'basis',
             'volume',
+            'date_from',
+            'date_to',
+            'basis',
             'price',
             'end_date',
             //'logistic',
-             'nomenclature',
+            
             [
                 'attribute' => \Yii::t('app', 'Quantity'), // Для объединения с фоном
                 'value' => 'responsecount'

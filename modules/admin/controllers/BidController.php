@@ -236,6 +236,24 @@ class BidController extends Controller
 
     }
 
+
+    public function actionWinnerNow($id_bid,$price,$id_response_winner)
+    {
+        \Yii::$app->language = isset($_SESSION['language']) ? $_SESSION['language'] : null;
+        
+        $model =  $this->findModel($id_bid);
+        $model->end_date = date('Y-m-d 01:00:00');
+        //$model->price = $price;
+        $model->id_response_winner = $id_response_winner;
+        // $winner = 'YES';
+       
+        if ($model->save() ) {
+                return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            var_dump('Что-то пошло не так, свяжитесь с нами') ; die;
+        }
+
+    }
     public function actionChaffer($id){
         \Yii::$app->language = isset($_SESSION['language']) ? $_SESSION['language'] : null;
 

@@ -107,8 +107,19 @@ foreach ($responses as $response) {
         $user_company_name = " ";
         $user_inn=' ';
     }
+
+    if ($model->id_response_winner == $response->id ){ 
+        if ($is_admin == 1 or $is_admin == 2 or $userId == $id_user ) {
+            echo '<div class="resp" style="border: 5px solid #0cb503">';
+            echo '<p class="winner">WINNER</p>';
+        }else {
+            echo '<div class="resp">';  
+        }
+    } else {
+        echo '<div class="resp">';   
+    }
 ?>
-    <div class="resp">
+    
         <div class="resp115">
             <b><?= \Yii::t('app', 'Price $') ?>:</b> <?= $response->price ?> 
             <?php  
@@ -137,7 +148,14 @@ foreach ($responses as $response) {
             <div class="resp11"><b><?= \Yii::t('app', 'Company') ?>: </b><br> <?= $user_company_name ?></div>
             <div class="resp11"><b><?= \Yii::t('app', 'Taxpayer Identification Number') ?>: </b><br> <?= $user_inn ?></div>
             <div class="resp115">
-                <?= Html::a(\Yii::t('app', 'Counteroffer'), ['bargain', 'id_response' => $response->id ], ['class' => 'btn btn-warning']); ?>               
+                
+                <?php 
+                    if ($model->id_response_winner == 0){ 
+                        echo Html::a(\Yii::t('app', 'Counteroffer'), ['bargain', 'id_response' => $response->id ], ['class' => 'btn btn-warning']);
+                        echo Html::a(\Yii::t('app', 'Select a winner'), ['winner-now', 'id_bid' => $model->id , 'price' =>  $price, 'id_response_winner'=>$response->id], ['class' => 'btn btn-success ml_20']);
+                    } 
+                ?>
+                
             </div>
         <?php   }    ?>
     </div>
